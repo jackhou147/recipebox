@@ -1,0 +1,250 @@
+
+$border-radius: 4px;
+
+@mixin flexbox($direction, $justify, $align) {
+    display: flex;
+    flex-direction: $direction;
+    justify-content: $justify;
+    align-items: $align;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.full-height {
+    max-height: 300px;
+}
+
+.none-display {
+    display: none;
+}
+
+.btn {
+    border: 1px solid;
+    border-radius: $border-radius;
+    cursor: pointer;
+    @include flexbox(column, center,center);
+}
+
+.btn-primary {
+    background-color: #337AB7;
+    &:hover {
+        background-color: #225077;
+    }
+}
+
+.btn-secondary {
+    color: black;
+    background-color: white;
+    border: 1px solid;
+    padding: 5px;
+}
+
+
+
+.App {
+    width: 100%;
+    
+    
+    .container {
+        border: 1px solid #b6b7ba;
+        width: 95%;
+        margin: auto;
+        margin-top: 5%;
+        background-color: #F5F5F5;
+        display: flex;
+        flex-direction: column;
+        padding: 20px 20px 0 20px;
+        min-height: 30vh;
+        border-radius: $border-radius;
+        
+        .item-container {
+            margin-bottom: 10px;
+            .item {
+                background-color: #DFF0D8;
+                min-height: 7vh;
+                border-radius: $border-radius;
+                border: 1px solid #d3e0ce;
+                overflow: visible;
+                position: relative;
+                .item-name {
+                    cursor: pointer;
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+            }
+            .ingredient-board {
+                width: 100%;
+                background-color: white;
+                @include flexbox(column,center,center);
+                transition: max-height .6s;
+                overflow: hidden;
+                
+                .ingredient-board__title {
+                    text-align: center;
+                }
+                
+                .ingredient-board__list {
+                    border: 1px solid;
+                    width: 93%;
+                    border-radius: $border-radius;
+                    div {
+                        min-height: 40px;
+                        @include flexbox(column, center, flex-start);
+                        padding-left: 5%;
+                        &:not(:last-child){
+                            border-bottom: 1px solid;
+                        }
+                    }
+                }
+                
+                .item__btns {
+                    @include flexbox(row, flex-start, center);
+                    width: 93%;
+                    margin-top: 5%;
+                    min-height: 50px;
+                    
+                    .delete-btn {
+                        width: 70px;
+                        height: 35px;
+                        background-color: #D9534F;
+                        border-radius: $border-radius;
+                        @include flexbox(column,center,center);
+                        cursor: pointer;
+                        color: white;
+                        margin-right: 5px;
+                        &:hover {
+                            background-color: #b24743
+                        }
+                    }
+                    
+                    .btn-primary {
+                        width: 55px;
+                        height: 35px;
+                        border: 1px solid;
+                        border-radius: $border-radius;
+                        cursor: pointer;
+                        @include flexbox(column, center,center);
+                        background-color: white;
+                        &:hover {
+                            background-color: #e5dede;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    .add-recipe-btn {
+        width: 110px;
+        height: 50px;
+        margin-top: 5%;
+        margin-left: 2.5vw;
+        background-color: #337AB7;
+        border-radius: 8px;
+        @include flexbox(row, center, center);
+        color: white;
+        cursor: pointer;
+        
+        &:hover {
+            background-color: #225077;
+        }
+    }
+    
+    .modal {
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgb(0,0,0);
+        background-color: rgba(0,0,0,0.4);
+        
+        .modal__title {
+            padding: 0 5%;
+            @include flexbox(row,space-between, center);
+            height: 8vh;
+            
+            span:nth-child(2){
+                font-size: 2em;
+                cursor: pointer;
+            }
+        }
+        .modal__input {
+            min-height: 25vh;
+            @include flexbox(column,center,center);
+
+            .modal-input-1,.modal-input-2 {
+                width: 90%;
+                height: 8vh;
+                margin-bottom: 10px;
+                input, textarea {
+                    width: 100%;
+                    resize: none;
+                }
+            }
+        }
+        
+        .edit-window, .add-window {
+            width: 94%;
+            margin: auto;
+            background-color: white;
+            min-height: 45%;
+            border-radius: $border-radius;
+            
+            .modal__buttons {
+                min-height: 8vh;
+                @include flexbox(row, flex-end, center);
+                .btn {
+                    height: 6vh;
+                    margin-right: 5%;
+                }
+                .btn-primary {
+                    background-color: #337AB7;
+                    padding: 0 8px;
+                    color: white;
+                    &:hover {
+                        background-color: #225077;
+                    }
+                }
+                .btn-secondary {
+                    color: black;
+                    background-color: white;
+                    padding: 5px;
+                    &:hover {
+                        background-color: #e5dede;
+                    }
+                }
+            }
+            
+        }
+            
+        
+    }
+    
+    
+}
+
+@media only screen and (min-width: 768px){
+    
+    .App {
+        .container {
+            width: 70vw;
+        }
+        .add-recipe-btn {
+            margin-left: 15vw;
+        }
+        
+        .modal {
+            .edit-window, .add-window {
+                width: 60%;
+            }
+        }
+    }
+    
+}
+
